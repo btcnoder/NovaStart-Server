@@ -1,0 +1,37 @@
+server:
+  # ???
+  port: 8088
+
+spring:
+  profiles:
+    active: dev
+  jackson:
+    # ???????????? null, ????
+    #    default-property-inclusion: non_null
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      # ????????
+      max-file-size: 10MB
+
+jwt:
+  # ???
+  issuer: quanxiaoha
+  # ??
+  secret: gR6cytlUlgMfVh08nLFZf8hMk4mdJDX5rWBVlsCbKvRlWcLwNRU6+rIPcLx21x191kJgP8udtoZuHt5yUDWtgg==
+  # token ??????????? 24*60
+  tokenExpireTime: 1440
+  # token Header ?? key ?
+  tokenHeaderKey: Authorization
+  # token Header ?? value ???
+  tokenPrefix: Bearer
+
+
+#=================================================================
+# minio
+#=================================================================
+minio:
+  endpoint: https://img.xxx.com
+  accessKey: xxx
+  secretKey: xxx
+  bucketName: xxx

@@ -1,26 +1,17 @@
 server:
   port: 8088
-
 spring:
   profiles:
     active: dev
-  jackson:
-    default-property-inclusion: non_null
-    date-format: yyyy-MM-dd HH:mm:ss
   servlet:
     multipart:
       max-file-size: 10MB
 
 jwt:
-  # ???
-  issuer: quanxiaoha
-  # ??
-  secret: gR6cytlUlgMfVh08nLFZf8hMk4mdJDX5rWBVlsCbKvRlWcLwNRU6+rIPcLx21x191kJgP8udtoZuHt5yUDWtgg==
-  # token ??????????? 24*60
+  issuer: novastart
+  secret: 3JRwE0S34MtAqToVPAz4W0EaB3lYer3io4j9FblK1xNPO7KIJEwRkhmYDzWUZMs0komra1uq/GwuX7oa6jC6gw==
   tokenExpireTime: 1440
-  # token Header ?? key ?
   tokenHeaderKey: Authorization
-  # token Header ?? value ???
   tokenPrefix: Bearer
 
 

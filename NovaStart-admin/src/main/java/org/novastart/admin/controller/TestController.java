@@ -1,5 +1,6 @@
 package org.novastart.admin.controller;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
+@Api(tags = "首页模块")
 public class TestController {
 
     @PostMapping("/admin/test")

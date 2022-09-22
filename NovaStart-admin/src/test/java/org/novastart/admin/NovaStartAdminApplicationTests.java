@@ -5,18 +5,17 @@ import static org.novastart.infrastructure.utils.JwtTokenHelper.generateBase64Ke
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.novastart.admin.model.User3;
 import org.novastart.infrastructure.domain.dos.UserDO;
 import org.novastart.infrastructure.domain.mapper.UserMapper;
+import org.novastart.infrastructure.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
 @SpringBootTest
 @Slf4j
 class NovaStartAdminApplicationTests {
-
-    @Test
-    void contextLoads() {
-    }
 
     @Test
     void testLog() {
@@ -52,5 +51,20 @@ class NovaStartAdminApplicationTests {
         String key = generateBase64Key();
         System.out.println("key: " + key);
 
+    }
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private RedisUtil redisUtil;
+    @Test
+    public void test(){
+        //真实开发中都使用json来传递对象
+        User3 user = new User3();
+        user.setName("笨笨熊2");
+        user.setAge(4);
+        redisUtil.set("user",user);
+        System.out.println(redisTemplate.opsForValue().get("user"));
     }
 }

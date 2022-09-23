@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.novastart.infrastructure.domain.dos.LoginUser;
 import org.novastart.infrastructure.utils.JwtTokenHelper;
+import org.novastart.infrastructure.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -41,6 +42,9 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // 从请求头中获取 key 为 Authorization 的值
@@ -50,7 +54,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         if (StringUtils.startsWith(header, tokenPrefix)) {
             // 截取 Token 令牌
             String token = StringUtils.substring(header, 7);
-            log.info("Token: {}", token);
 
             // 判空 Token
             if (StringUtils.isNotBlank(token)) {
@@ -67,16 +70,21 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
                 }
 
                 // 从 Token 中解析出用户名
-                String username = jwtTokenHelper.getUsernameByToken(token);
+                String userId = jwtTokenHelper.getUsernameByToken(token);
+                // 根据用户名获取用户详情信息
+                LoginUser loginUser = (LoginUser)redisUtil.get("LoginIdPrefix:" + userId);
 
-                if (StringUtils.isNotBlank(username)
+                if(Objects.isNull(loginUser)){
+                    authenticationEntryPoint.commence(request, response, new AuthenticationServiceException("用户未登录"));
+                    return;
+                }
+
+                if (StringUtils.isNotBlank(userId)
                     && Objects.isNull(SecurityContextHolder.getContext().getAuthentication())) {
-                    // 根据用户名获取用户详情信息
-                    UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                     // 将用户信息存入 authentication，方便后续校验
-                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
-                        userDetails.getAuthorities());
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(loginUser, null,
+                        loginUser.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     // 将 authentication 存入 ThreadLocal，方便后续获取用户信息
                     SecurityContextHolder.getContext().setAuthentication(authentication);

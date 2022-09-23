@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.novastart.infrastructure.exception.UsernameOrPasswordNullException;
+import org.novastart.infrastructure.exception.error.ErrorCodeEnum;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -37,7 +38,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         // 判断用户名、密码是否为空
         if (Objects.isNull(usernameNode) || Objects.isNull(passwordNode)
             || StringUtils.isBlank(usernameNode.textValue()) || StringUtils.isBlank(passwordNode.textValue())) {
-            throw new UsernameOrPasswordNullException("用户名或密码不能为空");
+            throw new UsernameOrPasswordNullException(ErrorCodeEnum.USERNAME_OR_PWD_NUll.getErrorMessage());
         }
 
         String username = usernameNode.textValue();

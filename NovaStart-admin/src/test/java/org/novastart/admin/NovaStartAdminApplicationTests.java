@@ -6,7 +6,7 @@ import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.novastart.admin.model.User3;
-import org.novastart.infrastructure.domain.dos.UserDO;
+import org.novastart.infrastructure.domain.dos.User;
 import org.novastart.infrastructure.domain.mapper.UserMapper;
 import org.novastart.infrastructure.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ class NovaStartAdminApplicationTests {
     @Test
     void insertTest() {
         // 构建数据库实体类
-        UserDO userDO = UserDO.builder()
+        User user = User.builder()
             .username("犬小哈")
             .password("123456")
             .createTime(new Date())
@@ -43,7 +43,7 @@ class NovaStartAdminApplicationTests {
             .isDeleted(false)
             .build();
 
-        userMapper.insert(userDO);
+        userMapper.insert(user);
     }
 
     @Test

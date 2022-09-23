@@ -18,7 +18,7 @@ public class RestAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        log.warn("", accessDeniedException);
+        log.warn("登录成功访问收保护的资源，但是权限不够: ", accessDeniedException);
         ResultUtil.ok(response, Response.fail(ErrorCodeEnum.FORBIDDEN));
     }
 }

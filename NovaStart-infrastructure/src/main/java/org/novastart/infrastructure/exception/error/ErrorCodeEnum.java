@@ -17,11 +17,13 @@ public enum ErrorCodeEnum implements ErrorCodeInterface {
     FORBIDDEN("10003", "演示账号仅支持查询操作！"),
     NO_TOKEN_OR_TOKEN_INVALID("10004", "Token 丢失或 Token 不可用！"),
     LOGIN_FAIL("10005", "登录失败"),
-    USERNAME_OR_PWD_ERROR("10006", "用户名或密码错误"),
-    UPLOAD_FILE_ERROR("10007", "文件上传失败"),
-    DUPLICATE_TAG_ERROR("10008", "提交的部分标签已被创建"),
-    DUPLICATE_CATEGORY_ERROR("10009", "该分类已被创建"),
-    TOKEN_EXPIRED("10010", "Token 已过期"),
+    USERNAME_OR_PWD_NUll("10006", "用户名或密码为空"),
+    USERNAME_OR_PWD_ERROR("10007", "用户名或密码错误"),
+    USERNAME_NOT_EXIST("10008", "用户名不存在"),
+    UPLOAD_FILE_ERROR("10009", "文件上传失败"),
+    DUPLICATE_TAG_ERROR("10010", "提交的部分标签已被创建"),
+    DUPLICATE_CATEGORY_ERROR("10011", "该分类已被创建"),
+    TOKEN_EXPIRED("10012", "Token 已过期"),
     ;
 
     // 异常码

@@ -17,15 +17,29 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @Profile("dev")
 public class Knife4jConfig {
 
-    @Bean("webApi")
-    public Docket createApiDoc() {
+    @Bean("adminApi")
+    public Docket createAdminApiDoc() {
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
             .apiInfo(buildApiInfo())
             // 分组名称
-            .groupName("Web 前台接口")
+            .groupName("admin接口")
             .select()
             // 这里指定 Controller 扫描包路径
             .apis(RequestHandlerSelectors.basePackage("org.novastart.admin.controller"))
+            .paths(PathSelectors.any())
+            .build();
+        return docket;
+    }
+
+    @Bean("blogApi")
+    public Docket createBlogApiDoc() {
+        Docket docket = new Docket(DocumentationType.SWAGGER_2)
+            .apiInfo(buildApiInfo())
+            // 分组名称
+            .groupName("blog接口")
+            .select()
+            // 这里指定 Controller 扫描包路径
+            .apis(RequestHandlerSelectors.basePackage("org.novastart.blog.controller"))
             .paths(PathSelectors.any())
             .build();
         return docket;

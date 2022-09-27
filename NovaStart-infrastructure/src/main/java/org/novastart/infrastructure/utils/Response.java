@@ -2,8 +2,8 @@ package org.novastart.infrastructure.utils;
 
 import java.io.Serializable;
 import lombok.Data;
-import org.novastart.infrastructure.exception.error.ErrorCodeInterface;
 import org.novastart.infrastructure.exception.BizException;
+import org.novastart.infrastructure.exception.error.ErrorCodeInterface;
 
 @Data
 public class Response<T> implements Serializable {

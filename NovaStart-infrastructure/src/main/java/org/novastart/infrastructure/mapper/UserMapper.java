@@ -1,13 +1,13 @@
-package org.novastart.infrastructure.domain.mapper;
+package org.novastart.infrastructure.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.novastart.infrastructure.domain.dos.User;
+import org.novastart.infrastructure.domain.entitty.User;
 
 public interface UserMapper extends BaseMapper<User> {
     default User findByUsername(String username) {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(User::getUsername, username);
+        wrapper.eq(User::getUserName, username);
         return selectOne(wrapper);
     }
 }

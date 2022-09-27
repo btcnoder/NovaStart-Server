@@ -1,4 +1,4 @@
-package org.novastart.infrastructure.model.vo;
+package org.novastart.infrastructure.domain.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

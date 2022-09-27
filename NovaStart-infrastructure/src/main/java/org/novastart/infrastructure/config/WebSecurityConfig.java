@@ -1,4 +1,4 @@
-package org.novastart.admin.config;
+package org.novastart.infrastructure.config;
 
 import org.novastart.infrastructure.security.JwtAuthenticationSecurityConfig;
 import org.novastart.infrastructure.security.RestAccessDeniedHandler;
@@ -55,3 +55,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new TokenAuthenticationFilter();
     }
 }
+

@@ -1,9 +1,13 @@
 package org.novastart.blog;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan({"org.novastart.*"})
+@MapperScan({"org.novastart.infrastructure.mapper"})
 public class NovaStartBlogApplication {
 
     public static void main(String[] args) {

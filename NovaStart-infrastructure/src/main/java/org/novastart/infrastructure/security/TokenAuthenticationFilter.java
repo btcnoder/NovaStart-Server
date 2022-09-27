@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.novastart.infrastructure.domain.dos.LoginUser;
+import org.novastart.infrastructure.domain.entitty.LoginUser;
 import org.novastart.infrastructure.utils.JwtTokenHelper;
 import org.novastart.infrastructure.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;

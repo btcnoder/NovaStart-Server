@@ -1,4 +1,4 @@
-package org.novastart.infrastructure.domain.dos;
+package org.novastart.infrastructure.domain.entitty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Collection;
@@ -25,7 +25,7 @@ public class LoginUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getUserName();
     }
 
     @JsonIgnore

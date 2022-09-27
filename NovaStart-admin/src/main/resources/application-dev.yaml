@@ -17,8 +17,3 @@ spring:
     database: 0
     host: 127.0.0.1
     port: 6379
-
-  security:
-    user:
-      name: admin # 登录用户名
-      password: 123456 # 登录密码
